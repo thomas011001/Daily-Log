@@ -1,0 +1,206 @@
+$bg-prim: #121212;
+$bg-sec: #555555;
+$prim: #564294;
+$sec: #8A6BF5;
+$cont: #303352;
+$text-prim: #FFFFFF;
+$text-sec: #B3B3B3;
+$success: #4CAF50;
+$warning: #FFC107;
+$blue: #2196F3;
+
+
+
+.form-text {
+    color: $text-sec;
+}
+
+i {
+    color: $text-sec;
+}
+
+.note i {
+    font-size: 1.3rem;
+}
+
+.event i {
+    font-size: 1.2rem;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: $bg-prim;
+    color: $text-prim;
+    position: relative;
+}
+
+.date {
+    color: $text-sec;
+}
+
+.item {
+    padding: 10px 12px;
+    color: $text-prim;
+    border-radius: 5px;
+    border: 2px solid $prim;
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.item:hover {
+    background-color: $prim;
+}
+
+.row.main {
+    height: 100vh;
+    padding: 80px 0;
+    gap: 10px;
+    overflow-y: scroll;
+    .box {
+        h1 i {
+            color: $prim; 
+            font-weight: 900;
+        }
+        color: white;
+        border-radius: 40px;
+        .nav {
+            gap: 10px;
+            li {
+                a {
+                    color: white;
+                    font-size: 1.3rem;
+                    border-radius: 10px;
+                }
+                a:hover {
+                    background-color: $prim;
+                }
+                a.active {
+                    background-color: $prim;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .row {
+        height: auto;
+    }
+}
+
+.btn.prim {
+    background-color: $sec;
+    border: none;
+    color: $text-prim;
+}
+.btn.prim:hover {
+    background-color: $prim;
+}
+
+.main-col {
+
+
+    #objects {
+        list-style: decimal;
+        margin: 0;
+        padding: 0;
+        li.item{
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-left: 20px;
+            cursor: pointer;
+            span {
+                font-size: 1.2rem;
+            }
+        }
+        .task.finished {
+            border-color: $text-sec;
+            color: $text-sec;
+
+            i {
+                color: #4f5f70;
+            }
+        }
+        .task.finished:hover {
+            background-color: transparent;
+        }
+    }
+}
+
+.modal input.disabled, .modal textarea.disabled {
+    background-color: transparent;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.task.finished span{
+    text-decoration: line-through;
+}
+
+.log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+        background-color: $prim;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+
+        a {
+            color: $text-prim;
+            font-weight: 800;
+        }
+    }
+}
+
+.hero {
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: $text-prim;
+    }
+    p {
+        color: $text-sec;
+        font-size: 1.8rem;
+    }
+    a {
+        padding: 10px;
+        min-width: 250px;
+        width: auto;
+        max-width: 500px;
+        font-size: 1.5rem;
+    }
+}
+
+.section.info {
+    .logo-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding-top: 30px;
+        i {
+            font-size: 10rem;
+            color: $prim;
+        }
+    }
+    .info-col {
+        p {
+            color: $text-sec;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{% extends "daily/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+<header>
+    <h2>All Your Logs</h2>
+</header>
+<hr>
+<ul class="all_logs">
+    {% for log in logs %}
+    <li class="item mt-3">
+        <a href="{% url 'log_view' log.id %}">Day: {{log.date}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

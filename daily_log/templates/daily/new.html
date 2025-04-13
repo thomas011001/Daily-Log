@@ -1,0 +1,37 @@
+{% extends "daily/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<header>
+    <h2>New Log</h2>
+</header>
+<hr>
+<main>
+    <div id="msg">
+    </div>
+    <form id="newLog">
+        {% csrf_token %}
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="date" class="col-form-label">Log Date</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" required id="date" class="form-control">
+            </div>
+            <div class="col-auto">
+                <span id="passwordHelpInline" class="form-text">
+                    the date should be today date or after
+                </span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary mt-3" value="Create">
+    </form>
+</main>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/new.js' %}?v=4"></script>
+{% endblock %}

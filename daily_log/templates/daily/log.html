@@ -1,0 +1,174 @@
+{% extends "daily/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+<header>
+    <h2 id="log-day"></h2>
+</header>
+<hr>
+<div class="daily-log">
+    <div id="msg"></div>
+    <div class="data">
+        <ul id="objects">
+            
+        </ul>
+        <div class="d-grid gap-2">
+            <button class="btn item prim" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                New Object
+            </button>        
+        </div>
+        <div class="collapse" id="collapse">
+            <div class="d-grid gap-3 pt-3">
+                <button class="btn item" type="button" data-bs-toggle="modal" data-bs-target="#taskModal">Task</button>
+                <button class="btn item" type="button" data-bs-toggle="modal" data-bs-target="#noteModal">Note</button>
+                <button class="btn item" type="button" data-bs-toggle="modal" data-bs-target="#eventModal">Event</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- task Modal -->
+<div class="modal fade" id="taskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="taskModalLabel">New Task</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="taskForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="task-title" class="form-label">Task Title</label>
+                        <input type="text" required name="title" maxlength="50" class="form-control" id="task-title" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="task-description" class="form-label">Task Description</label>
+                        <textarea class="form-control" maxlength="300" id="task-description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="task-finished">
+                        <label class="form-check-label" for="task-finished">
+                            Finished
+                        </label>
+                    </div>                      
+                    <div class="row g-3 align-items-center ">
+                        <div class="col-auto">
+                            <label for="task-time" class="col-form-label">Dead Line:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="time" id="task-time" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <span class="form-text">
+                                (24 Format)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="task-close">Close</button>
+                    <button type="button" class="btn btn-success hidden" id="task-edit">Edit</button>
+                    <button type="button" class="btn btn-success hidden" id="task-save">Save</button>
+                    <button type="button" class="btn btn-danger hidden" id="task-delete">Delete</button>
+                    <input type="submit" id="task-submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- note modal -->
+<div class="modal fade" id="noteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="noteModalLabel">New Note</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="noteForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="note-title" class="form-label">Note Title</label>
+                        <input type="text" required name="title" maxlength="50" class="form-control" id="note-title" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="note-description" class="form-label">Note Description</label>
+                        <textarea class="form-control" maxlength="300" id="note-description" name="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="note-close" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success hidden" id="note-edit">Edit</button>
+                    <button type="button" class="btn btn-success hidden" id="note-save">Save</button>
+                    <button type="button" class="btn btn-danger hidden" id="note-delete">Delete</button>
+                    <input type="submit" id="note-submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- event modal -->
+<div class="modal fade" id="eventModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="eventModalLabel">New Event</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="eventForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="event-title" class="form-label">Event Title</label>
+                        <input type="text" required name="title" maxlength="50" class="form-control" id="event-title" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="event-description" class="form-label">Event Description</label>
+                        <textarea class="form-control" maxlength="300" id="event-description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-auto">
+                            <label for="event-start-time" class="col-form-label">Start Time:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="time" required name="time" id="event-start-time" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <label for="event-end-time" class="col-form-label">End Time:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="time" required id="event-end-time" name="end-time" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                        <div class="col-auto">
+                            <span class="form-text ">
+                                (24 Format)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="event-close" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success hidden" id="event-edit">Edit</button>
+                    <button type="button" class="btn btn-success hidden" id="event-save">Save</button>
+                    <button type="button" class="btn btn-danger hidden" id="event-delete">Delete</button>
+                    <input type="submit" class="btn btn-primary" id="event-submit" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+    const logId = "{{id}}"
+</script>
+<script src="{% static 'js/log.js' %}?v=7" ></script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "daily/layout.html" %}
+
+{% block body %}
+    <div class="hero section mb-5">
+        <h1>Capture every moment. Daily.</h1>
+        <p>Track your life. Beautifully.</p>
+        {% if request.user.is_authenticated %}
+        <a class="btn prim" href="{% url 'new' %}">Create Your First Log Now</a>
+        {% else %}
+        <a class="btn prim" href="{% url 'register' %}">Start Now</a>
+        {% endif %}
+    </div>
+    <hr class="my-5">
+    <div class="section info mt-5">
+        <div class="row">
+            <div class="col mb-5 info-col">
+                <ul>
+                    <li>
+                        <h3>Make today count.</h3>
+                        <p>Start each day with purpose and intention. Plan it carefully, write it down, and look back on your journey anytime to reflect and grow.</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <h3>Just you and your thoughts.</h3>
+                        <p>Your logs are private, personal, and saved on your device. Secure, organized, and accessible anytime, with no noise, no distractions.</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <h3>Your day deserves to be written.</h3>
+                        <p>DailyLog gives you a space to capture your thoughts, goals, and feelings — every single day, helping you reflect, track progress, and grow over time.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-md logo-col">
+                <i class="fa-solid me-3 fa-spinner"></i>
+                <h1>DailyLog</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
